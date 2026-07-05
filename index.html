@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitud de Presupuesto | Ángel Ruiz Electricista</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary-color: #F4B400;
+      --primary-hover: #D89B00;
+      --text-color: #111111;
+      --bg-color: #f3f4f6;
+      --form-bg: #ffffff;
+      --border-color: #d1d5db;
+      --dark: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: var(--form-bg);
+      max-width: 650px;
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    .form-header {
+      background: linear-gradient(135deg, #111111, #2b2b2b);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .form-header h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .form-header p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #f3f3f3;
+    }
+
+    form {
+      padding: 35px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 39px;
+      color: #9ca3af;
+      z-index: 10;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 15px 12px 42px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      outline: none;
+      background-color: #f9fafb;
+      color: var(--text-color);
+    }
+
+    textarea {
+      padding-left: 15px;
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary-color);
+      background-color: #fff;
+      box-shadow: 0 0 0 4px rgba(244, 180, 0, 0.18);
+    }
+
+    optgroup {
+      font-weight: bold;
+      color: var(--primary-color);
+      background: #fff;
+    }
+
+    optgroup option {
+      font-weight: normal;
+      color: var(--text-color);
+    }
+
+    .file-upload {
+      position: relative;
+      display: block;
+      border: 2px dashed var(--border-color);
+      padding: 22px;
+      border-radius: 12px;
+      text-align: center;
+      background: #f9fafb;
+      cursor: pointer;
+      transition: border 0.3s, background 0.3s;
+    }
+
+    .file-upload:hover {
+      border-color: var(--primary-color);
+      background: #fffdf4;
+    }
+
+    .file-upload input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-upload i {
+      font-size: 28px;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .file-upload p {
+      font-size: 14px;
+      color: #4b5563;
+      font-weight: 600;
+    }
+
+    .file-note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .privacy-policy {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 25px 0;
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.4;
+    }
+
+    .privacy-policy input {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--primary-color);
+    }
+
+    .privacy-policy a {
+      color: var(--dark);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background-color: var(--primary-color);
+      color: var(--dark);
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.1s;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .success-message i {
+      font-size: 50px;
+      color: #10b981;
+      margin-bottom: 15px;
+    }
+
+    .success-message h2 {
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .success-message p {
+      font-size: 16px;
+      color: #374151;
+      line-height: 1.5;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 13px;
+      color: #6b7280;
+      padding: 0 35px 30px;
+    }
+
+    @media (max-width: 600px) {
+      .form-header {
+        padding: 25px 20px;
+      }
+
+      form {
+        padding: 25px 20px;
+      }
+
+      .form-header h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="form-container">
+
+  <div class="form-header">
+    <h2>Solicita tu presupuesto</h2>
+    <p>Cuéntanos qué necesitas. Te responderemos lo antes posible.</p>
+  </div>
+
+  <form id="budgetForm" onsubmit="handleFormSubmit(event)">
+
+    <div class="input-group">
+      <label for="fullName">Nombre completo *</label>
+      <i class="fa-solid fa-user"></i>
+      <input type="text" id="fullName" required placeholder="Tu nombre y apellidos">
+    </div>
+
+    <div class="input-group">
+      <label for="phone">Teléfono *</label>
+      <i class="fa-solid fa-phone"></i>
+      <input type="tel" id="phone" required placeholder="Ej.: 675 653 630">
+    </div>
+
+    <div class="input-group">
+      <label for="email">Correo electrónico *</label>
+      <i class="fa-solid fa-envelope"></i>
+      <input type="email" id="email" required placeholder="ejemplo@correo.com">
+    </div>
+
+    <div class="input-group">
+      <label for="municipality">Municipio *</label>
+      <i class="fa-solid fa-location-dot"></i>
+      <select id="municipality" required>
+        <option value="" disabled selected>Selecciona tu municipio</option>
+
+        <optgroup label="Tenerife Sur">
+          <option>Adeje</option>
+          <option>Arona</option>
+          <option>Granadilla de Abona</option>
+          <option>San Miguel de Abona</option>
+          <option>Guía de Isora</option>
+          <option>Santiago del Teide</option>
+          <option>Arico</option>
+          <option>Fasnia</option>
+          <option>Vilaflor de Chasna</option>
+        </optgroup>
+
+        <optgroup label="Área Metropolitana">
+          <option>Santa Cruz de Tenerife</option>
+          <option>San Cristóbal de La Laguna</option>
+          <option>El Rosario</option>
+          <option>Tegueste</option>
+        </optgroup>
+
+        <optgroup label="Tenerife Norte">
+          <option>Puerto de la Cruz</option>
+          <option>La Orotava</option>
+          <option>Los Realejos</option>
+          <option>Santa Úrsula</option>
+          <option>Tacoronte</option>
+          <option>El Sauzal</option>
+          <option>La Matanza de Acentejo</option>
+          <option>La Victoria de Acentejo</option>
+          <option>Icod de los Vinos</option>
+          <option>Garachico</option>
+          <option>Buenavista del Norte</option>
+          <option>Los Silos</option>
+          <option>El Tanque</option>
+          <option>La Guancha</option>
+          <option>San Juan de la Rambla</option>
+        </optgroup>
+
+        <optgroup label="Valle de Güímar">
+          <option>Candelaria</option>
+          <option>Güímar</option>
+          <option>Arafo</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="serviceType">Tipo de servicio *</label>
+      <i class="fa-solid fa-bolt"></i>
+      <select id="serviceType" required>
+        <option value="" disabled selected>Selecciona una opción</option>
+        <option>Avería eléctrica</option>
+        <option>Instalación eléctrica</option>
+        <option>Reforma eléctrica</option>
+        <option>Cuadro eléctrico</option>
+        <option>Punto de recarga para vehículo eléctrico</option>
+        <option>Paneles solares</option>
+       <option>Mantenimiento eléctrico</option>
+        <option>Otro</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="description">Descripción del trabajo *</label>
+      <textarea id="description" required placeholder="Describe el trabajo con el mayor detalle posible para poder preparar un presupuesto más preciso."></textarea>
+    </div>
+
+    <div class="input-group">
+      <label>Adjuntar hasta 5 fotos</label>
+      <div class="file-upload">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <p>Haz clic o arrastra tus imágenes aquí</p>
+        <input type="file" id="photos" accept="image/png, image/jpeg, image/webp" multiple onchange="validateFiles(this)">
+      </div>
+      <div class="file-note">Formatos permitidos: JPG, PNG y WEBP. Máximo 5 fotos.</div>
+    </div>
+
+    <div class="privacy-policy">
+      <input type="checkbox" id="privacy" required>
+      <label for="privacy">
+        He leído y acepto la
+        <a href="/politica-de-privacidad" target="_blank">Política de Privacidad</a>.
+      </label>
+    </div>
+
+    <button type="submit" class="btn-submit">⚡ Solicitar presupuesto</button>
+  </form>
+
+  <div id="successMessage" class="success-message">
+    <i class="fa-solid fa-circle-check"></i>
+    <h2>¡Solicitud enviada!</h2>
+    <p>Gracias por contactar con <strong>Ángel Ruiz Electricista</strong>.<br>Te responderemos lo antes posible.</p>
+  </div>
+
+  <div class="footer-note">
+    Servicio en Tenerife Norte y Sur · WhatsApp: 675 653 630
+  </div>
+
+</div>
+
+<script>
+  function validateFiles(input) {
+    if (input.files.length > 5) {
+      alert("Por favor, selecciona un máximo de 5 fotos.");
+      input.value = "";
+      return;
+    }
+
+    const maxSize = 5 * 1024 * 1024;
+
+    for (let file of input.files) {
+      if (file.size > maxSize) {
+        alert("Cada imagen debe pesar menos de 5 MB.");
+        input.value = "";
+        return;
+      }
+    }
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("fullName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const municipality = document.getElementById("municipality").value;
+    const serviceType = document.getElementById("serviceType").value;
+    const description = document.getElementById("description").value.trim();
+    const privacy = document.getElementById("privacy").checked;
+
+    if (!name || !phone || !email || !municipality || !serviceType || !description || !privacy) {
+      alert("Por favor, completa todos los campos obligatorios.");
+      return;
+    }
+
+    document.getElementById("budgetForm").style.display = "none";
+    document.getElementById("successMessage").style.display = "block";
+
+    /*
+      IMPORTANTE:
+      Este formulario todavía NO envía datos a un correo ni a Firebase.
+      Esta versión es visual y funcional para pruebas.
+
+      Después conectaremos este bloque a:
+      - Firebase
+      - EmailJS
+      - o WhatsApp automático
+    */
+  }
+</script>
+
+</body>
+</html>
